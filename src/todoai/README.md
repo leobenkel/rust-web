@@ -4,6 +4,12 @@
 
 ### Initialize
 
+Run:
+```bash
+cp .env.sample .env
+```
+and fill up the file.
+
 This needs to be run each time you start/restart the docker application:
 
 ```bash
