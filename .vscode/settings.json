@@ -1,9 +1,13 @@
 {
     "cSpell.words": [
         "axum",
+        "dotenv",
         "oneshot",
         "prometheus",
         "reqwest",
+        "sqlx",
+        "todoai",
+        "todos",
         "tokio"
     ],
     "files.exclude": {
@@ -15,5 +19,8 @@
         "**/Thumbs.db": true,
         "Cargo.lock": true,
         "target": true
-    }
+    },
+    "rust-analyzer.linkedProjects": [
+        "./Cargo.toml"
+    ]
 }
