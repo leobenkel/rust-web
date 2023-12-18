@@ -15,12 +15,12 @@ pub struct CreateTodo {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UpdateTodo {
-    pub title: String,
-    pub description: String,
-    pub status: Status,
-    pub priority: Priority,
+    pub title: Option<String>,
+    pub description: Option<String>,
+    pub status: Option<Status>,
+    pub priority: Option<Priority>,
     pub deadline: Option<NaiveDateTime>,
-    pub tags: String,
+    pub tags: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

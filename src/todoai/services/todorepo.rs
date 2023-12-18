@@ -115,6 +115,8 @@ impl TodoRepo for PostgresTodoRepo {
     }
 
     async fn update(&self, id: TodoId, update_todo: UpdateTodo) -> Option<Todo> {
+        let previous_todo = self.get_by_id(id.clone()).await.unwrap();
+
         let result = sqlx::query!(
             r#"
             UPDATE todos
@@ -123,12 +125,12 @@ impl TodoRepo for PostgresTodoRepo {
             RETURNING id, title, description, created_at, status, priority, deadline, tags
             "#,
             id.0,
-            update_todo.title,
-            update_todo.description,
-            update_todo.status as i16,
-            update_todo.priority as i16,
-            update_todo.deadline,
-            update_todo.tags,
+            update_todo.title.unwrap_or(previous_todo.title),
+            update_todo.description.unwrap_or(previous_todo.description),
+            update_todo.status.unwrap_or(previous_todo.status) as i16,
+            update_todo.priority.unwrap_or(previous_todo.priority) as i16,
+            update_todo.deadline.or_else(|| previous_todo.deadline),
+            update_todo.tags.unwrap_or(previous_todo.tags),
         )
         .fetch_one(&self.pool)
         .await

@@ -50,7 +50,7 @@ impl<S: TodoService> Handler<S> {
 
     pub async fn delete_by_id(
         State(todo_service): State<S>,
-        Json(DeleteByIdRequest { id }): Json<DeleteByIdRequest>,
+        Path(DeleteByIdRequest { id }): Path<DeleteByIdRequest>,
     ) -> Json<bool> {
         let result = todo_service.delete_by_id(id).await;
 
